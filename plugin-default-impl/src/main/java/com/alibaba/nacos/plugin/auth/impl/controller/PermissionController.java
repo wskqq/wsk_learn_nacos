@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Permission operation controller.
- *
+ * nacos权限操作处理类
  * @author nkorange
  * @since 1.2.0
  */
