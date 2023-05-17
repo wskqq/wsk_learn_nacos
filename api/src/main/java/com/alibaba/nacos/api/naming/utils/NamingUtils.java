@@ -138,11 +138,13 @@ public class NamingUtils {
      * @throws NacosException if check failed, throw exception
      */
     public static void checkInstanceIsLegal(Instance instance) throws NacosException {
+        // TODO 心跳超时时间 < 心跳间隔时间 或者 ip删除的超时时间 < 心跳间隔时间  抛出异常
         if (instance.getInstanceHeartBeatTimeOut() < instance.getInstanceHeartBeatInterval()
                 || instance.getIpDeleteTimeout() < instance.getInstanceHeartBeatInterval()) {
             throw new NacosApiException(NacosException.INVALID_PARAM, ErrorCode.INSTANCE_ERROR,
                     "Instance 'heart beat interval' must less than 'heart beat timeout' and 'ip delete timeout'.");
         }
+        // TODO 集群名称不等于空时，校验名称格式是否正确
         if (!StringUtils.isEmpty(instance.getClusterName()) && !CLUSTER_NAME_PATTERN.matcher(instance.getClusterName()).matches()) {
             throw new NacosApiException(NacosException.INVALID_PARAM, ErrorCode.INSTANCE_ERROR,
                     String.format("Instance 'clusterName' should be characters with only 0-9a-zA-Z-. (current: %s)",

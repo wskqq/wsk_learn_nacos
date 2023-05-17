@@ -101,10 +101,13 @@ public class InstanceController {
     @PostMapping
     @Secured(action = ActionTypes.WRITE)
     public String register(HttpServletRequest request) throws Exception {
-        
+        // TODO nacos服务注册处理接口
+        // TODO 获取namespaceId,客户端上送取客户端上送值，不上送取默认值
         final String namespaceId = WebUtils
                 .optional(request, CommonParams.NAMESPACE_ID, Constants.DEFAULT_NAMESPACE_ID);
+        // TODO 获取客户端上送的serviceName
         final String serviceName = WebUtils.required(request, CommonParams.SERVICE_NAME);
+        // TODO 校验serviceName格式
         NamingUtils.checkServiceNameFormat(serviceName);
         
         final Instance instance = HttpRequestInstanceBuilder.newBuilder()
